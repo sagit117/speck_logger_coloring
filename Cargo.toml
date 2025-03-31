@@ -1,0 +1,9 @@
+[package]
+name = "speck_logger_coloring"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+cpeck_logger = { path = "../cpeck_logger" }
+cpeck_text_coloring = { path = "../cpeck_text_coloring" }
+chrono = "0.4.40"
