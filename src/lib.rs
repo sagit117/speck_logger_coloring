@@ -12,43 +12,51 @@ use speck_text_coloring::{black, blue, purple, red, yellow};
 /// ```
 /// use crate::speck_logger_coloring::LogWriter;
 /// 
-/// let mut logger = speck_logger_coloring::ColorizedConsoleLogger::new(speck_logger::LogLevel::ALL);
+/// let mut logger = speck_logger_coloring::ColorizedConsoleLogger::new(speck_logger::LogLevel::ALL, "TEST");
 /// logger.info("info");
 /// logger.debug("debug");
 /// logger.warning("warning");
 /// logger.error("error");
 /// ```
 pub struct ColorizedConsoleLogger {
-    logger: Logger
+    logger: Logger,
+    name: String
 }
 
 impl ColorizedConsoleLogger {
-    pub fn new(level: LogLevel) -> Self {
+    pub fn new(level: LogLevel, name: &str) -> Self {
         ColorizedConsoleLogger {
             logger: Logger {
                 out: Box::new(std::io::stdout()),
                 level,
-                formatter: |message: &str, level: LogLevel| -> String { format!("{} [{: <16}] {}\n", date_format_now(), color_level(level), message) }
-            }
+                formatter: |message: &str, level: LogLevel| -> String { 
+                    format!("{} [{: <16}] {}\n", date_format_now(), color_level(level), message) 
+                }
+            },
+            name: name.to_string()
         }
     }
 }
 
 impl LogWriter<()> for ColorizedConsoleLogger {
     fn info(&mut self, message: &str) {
-        self.logger.info(message).expect("Ошибка записи лога!");
+        let message_compile = format!("{}: {}", self.name, message);
+        self.logger.info(&message_compile).expect("Ошибка записи лога!");
     }
 
     fn debug(&mut self, message: &str) {
-        self.logger.debug(message).expect("Ошибка записи лога!");
+        let message_compile = format!("{}: {}", self.name, message);
+        self.logger.debug(&message_compile).expect("Ошибка записи лога!");
     }
 
     fn warning(&mut self, message: &str) {
-        self.logger.warning(message).expect("Ошибка записи лога!");
+        let message_compile = format!("{}: {}", self.name, message);
+        self.logger.warning(&message_compile).expect("Ошибка записи лога!");
     }
 
     fn error(&mut self, message: &str) {
-        self.logger.error(message).expect("Ошибка записи лога!");
+        let message_compile = format!("{}: {}", self.name, message);
+        self.logger.error(&message_compile).expect("Ошибка записи лога!");
     }
 }
 
