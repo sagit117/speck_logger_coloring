@@ -65,14 +65,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "773648b94d0e5d620f64f280777445740e61fe701025087ec8b57f45c791888b"
 
 [[package]]
-name = "cpeck_logger"
-version = "0.1.0"
-
-[[package]]
-name = "cpeck_text_coloring"
-version = "0.1.0"
-
-[[package]]
 name = "iana-time-zone"
 version = "0.1.62"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -164,13 +156,21 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0fda2ff0d084019ba4d7c6f371c95d8fd75ce3524c3cb8fb653a3023f6323e64"
 
 [[package]]
+name = "speck_logger"
+version = "0.1.0"
+
+[[package]]
 name = "speck_logger_coloring"
 version = "0.1.0"
 dependencies = [
  "chrono",
- "cpeck_logger",
- "cpeck_text_coloring",
+ "speck_logger",
+ "speck_text_coloring",
 ]
+
+[[package]]
+name = "speck_text_coloring"
+version = "0.1.0"
 
 [[package]]
 name = "syn"

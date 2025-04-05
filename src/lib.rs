@@ -1,8 +1,8 @@
 #![crate_type = "lib"]
 #![crate_name = "speck_logger_coloring"]
 use chrono::Utc;
-use cpeck_logger::{LogLevel, Logger};
-use cpeck_text_coloring::{black, blue, purple, red, yellow};
+use speck_logger::{LogLevel, Logger};
+use speck_text_coloring::{black, blue, purple, red, yellow};
 
 /// Функционал для создания цветного консольного логгера.
 ///
