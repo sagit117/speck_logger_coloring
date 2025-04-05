@@ -15,15 +15,35 @@ use speck_text_coloring::{black, blue, purple, red, yellow};
 /// logger.warning("warning");
 /// logger.error("error");
 /// ```
-pub struct ColorizedConsoleLogger;
+pub struct ColorizedConsoleLogger {
+    logger: Logger
+}
 
 impl ColorizedConsoleLogger {
-    pub fn new(level: Level) -> Logger {
-        Logger {
-            out: Box::new(std::io::stdout()),
-            level: level_to_log_level(level),
-            formatter: |message: &str, level: LogLevel| -> String { format!("{} [{: <16}] {}\n", date_format_now(), color_level(level), message) }
+    pub fn new(level: Level) -> ColorizedConsoleLogger {
+        ColorizedConsoleLogger {
+            logger: Logger {
+                out: Box::new(std::io::stdout()),
+                level: level_to_log_level(level),
+                formatter: |message: &str, level: LogLevel| -> String { format!("{} [{: <16}] {}\n", date_format_now(), color_level(level), message) }
+            }
         }
+    }
+
+    pub fn info(&mut self, message: &str) {
+        self.logger.info(message).expect("Ошибка записи лога!");
+    }
+
+    pub fn debug(&mut self, message: &str) {
+        self.logger.debug(message).expect("Ошибка записи лога!");
+    }
+
+    pub fn warning(&mut self, message: &str) {
+        self.logger.warning(message).expect("Ошибка записи лога!");
+    }
+
+    pub fn error(&mut self, message: &str) {
+        self.logger.error(message).expect("Ошибка записи лога!");
     }
 }
 
