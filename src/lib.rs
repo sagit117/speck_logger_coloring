@@ -1,6 +1,6 @@
 #![crate_type = "lib"]
 #![crate_name = "speck_logger_coloring"]
-use chrono::Utc;
+use chrono::Local;
 use speck_logger::{LogLevel, Logger};
 use speck_text_coloring::{black, blue, purple, red, yellow};
 
@@ -75,6 +75,6 @@ fn color_level(level: LogLevel) -> String {
 }
 
 fn date_format_now() -> String {
-    let now = Utc::now();
+    let now = Local::now();
     now.format("%Y-%m-%d %H:%M:%S").to_string()
 }
