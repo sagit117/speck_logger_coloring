@@ -20,7 +20,7 @@ pub struct ColorizedConsoleLogger {
 }
 
 impl ColorizedConsoleLogger {
-    pub fn new(level: Level) -> ColorizedConsoleLogger {
+    pub fn new(level: Level) -> Self {
         ColorizedConsoleLogger {
             logger: Logger {
                 out: Box::new(std::io::stdout()),
@@ -29,20 +29,22 @@ impl ColorizedConsoleLogger {
             }
         }
     }
+}
 
-    pub fn info(&mut self, message: &str) {
+impl LogWriter for ColorizedConsoleLogger {
+    fn info(&mut self, message: &str) {
         self.logger.info(message).expect("Ошибка записи лога!");
     }
 
-    pub fn debug(&mut self, message: &str) {
+    fn debug(&mut self, message: &str) {
         self.logger.debug(message).expect("Ошибка записи лога!");
     }
 
-    pub fn warning(&mut self, message: &str) {
+    fn warning(&mut self, message: &str) {
         self.logger.warning(message).expect("Ошибка записи лога!");
     }
 
-    pub fn error(&mut self, message: &str) {
+    fn error(&mut self, message: &str) {
         self.logger.error(message).expect("Ошибка записи лога!");
     }
 }
@@ -97,4 +99,11 @@ fn color_level(level: LogLevel) -> String {
 fn date_format_now() -> String {
     let now = Local::now();
     now.format("%Y-%m-%d %H:%M:%S").to_string()
+}
+
+pub trait LogWriter {
+    fn info(&mut self, message: &str);
+    fn warning(&mut self, message: &str);
+    fn debug(&mut self, message: &str);
+    fn error(&mut self, message: &str);
 }
