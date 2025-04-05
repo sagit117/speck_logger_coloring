@@ -18,12 +18,30 @@ use speck_text_coloring::{black, blue, purple, red, yellow};
 pub struct ColorizedConsoleLogger;
 
 impl ColorizedConsoleLogger {
-    pub fn new(level: LogLevel) -> Logger {
+    pub fn new(level: Level) -> Logger {
         Logger {
             out: Box::new(std::io::stdout()),
-            level,
+            level: level_to_log_level(level),
             formatter: |message: &str, level: LogLevel| -> String { format!("{} [{: <16}] {}\n", date_format_now(), color_level(level), message) }
         }
+    }
+}
+
+pub enum Level {
+    ALL,
+    DEBUG,
+    INFO,
+    WARNING,
+    ERROR
+}
+
+fn level_to_log_level(level: Level) -> LogLevel {
+    match level {
+        Level::ALL => LogLevel::ALL,
+        Level::DEBUG => LogLevel::DEBUG,
+        Level::INFO => LogLevel::INFO,
+        Level::WARNING => LogLevel::WARNING,
+        Level::ERROR => LogLevel::ERROR,
     }
 }
 
