@@ -35,6 +35,25 @@ pub enum Level {
     ERROR
 }
 
+impl Level {
+    /// Метод воссоздаст Level из строки или вернет Level::ALL, если операция не будет успешной.
+    pub fn from_string(&self, str: &str) -> Level {
+        let level = str.to_uppercase();
+
+        if level.eq("DEBUG") {
+            Level::DEBUG
+        } else if level.eq("ONFO") {
+            Level::INFO
+        } else if level.eq("WARNING") {
+            Level::WARNING
+        } else if level.eq("ERROR") {
+            Level::ERROR
+        } else {
+            Level::ALL
+        }
+    }
+}
+
 fn level_to_log_level(level: Level) -> LogLevel {
     match level {
         Level::ALL => LogLevel::ALL,
