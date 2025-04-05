@@ -10,7 +10,9 @@ use speck_text_coloring::{black, blue, purple, red, yellow};
 /// #Example
 ///
 /// ```
-/// let mut logger = speck_logger_coloring::ColorizedConsoleLogger::new(cpeck_logger::LogLevel::ALL);
+/// use crate::speck_logger_coloring::LogWriter;
+/// 
+/// let mut logger = speck_logger_coloring::ColorizedConsoleLogger::new(speck_logger::LogLevel::ALL);
 /// logger.info("info");
 /// logger.debug("debug");
 /// logger.warning("warning");
