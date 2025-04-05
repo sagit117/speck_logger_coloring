@@ -37,7 +37,7 @@ pub enum Level {
 
 impl Level {
     /// Метод воссоздаст Level из строки или вернет Level::ALL, если операция не будет успешной.
-    pub fn from_string(&self, str: &str) -> Level {
+    pub fn from_string(str: &str) -> Level {
         let level = str.to_uppercase();
 
         if level.eq("DEBUG") {
