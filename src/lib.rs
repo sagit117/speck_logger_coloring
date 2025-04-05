@@ -27,7 +27,7 @@ impl ColorizedConsoleLogger {
     pub fn new(level: LogLevel, name: &str) -> Self {
         ColorizedConsoleLogger {
             logger: Logger {
-                out: Box::new(std::io::stdout()),
+                out: Box::new(std::io::stdout().lock()),
                 level,
                 formatter: |message: &str, level: LogLevel| -> String { 
                     format!("{} [{: <16}] {}\n", date_format_now(), color_level(level), message) 
